@@ -1,0 +1,351 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Signup Page</title>-->
+<!--    &lt;!&ndash; Material-UI CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://unpkg.com/@mui/material@latest/dist/material-ui.min.css">-->
+<!--    <style>-->
+<!--        /* Additional custom styling */-->
+<!--        body {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: flex-start;-->
+<!--            height: 100vh;-->
+<!--            margin: 0;-->
+<!--            background-color: #fff;-->
+<!--        }-->
+<!--        .container {-->
+<!--            max-width: 400px;-->
+<!--            width: 100%;-->
+<!--            padding: 20px;-->
+<!--            background-color: #f8f8f8;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            text-align: center;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+<!--        .form-group {-->
+<!--            margin-bottom: 15px;-->
+<!--            text-align: left;-->
+<!--            position: relative;-->
+<!--        }-->
+<!--        .form-group label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 5px;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--        .form-group input {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 5px;-->
+<!--            box-sizing: border-box;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .toggle-password {-->
+<!--            position: absolute;-->
+<!--            top: 38px;-->
+<!--            right: 10px;-->
+<!--            cursor: pointer;-->
+<!--            background: none;-->
+<!--            border: none;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--        .mui-button {-->
+<!--            background-color: #ff416c;-->
+<!--            color: #fff;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            width: 100%;-->
+<!--        }-->
+<!--        .mui-button:hover {-->
+<!--            background-color: #fff;-->
+<!--            color: #ff416c;-->
+<!--            border: 1px solid #ff416c;-->
+<!--        }-->
+<!--        .error {-->
+<!--            color: red;-->
+<!--            font-size: 0.875rem;-->
+<!--        }-->
+<!--        h2 {-->
+<!--            margin-bottom: 20px;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h2>Register</h2>-->
+<!--    <form id="signup-form">-->
+<!--        <div class="form-group">-->
+<!--            <label for="username">Username</label>-->
+<!--            <input type="text" id="username" class="mui-textfield" placeholder="Enter username" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="password">Password</label>-->
+<!--            <input type="password" id="password" class="mui-textfield" placeholder="Enter password" required>-->
+<!--            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">Show</button>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="repeat-password">Repeat Password</label>-->
+<!--            <input type="password" id="repeat-password" class="mui-textfield" placeholder="Repeat password" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="mui-button mui-button-contained mui-button-primary">NEXT</button>-->
+<!--        <p id="error-message" class="error"></p>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Material-UI JS &ndash;&gt;-->
+<!--<script src="https://unpkg.com/@mui/material@latest/dist/material-ui.min.js"></script>-->
+<!--<script>-->
+<!--    function togglePasswordVisibility(fieldId) {-->
+<!--        const field = document.getElementById(fieldId);-->
+<!--        const toggleButton = field.nextElementSibling;-->
+<!--        if (field.type === "password") {-->
+<!--            field.type = "text";-->
+<!--            toggleButton.textContent = "Hide";-->
+<!--        } else {-->
+<!--            field.type = "password";-->
+<!--            toggleButton.textContent = "Show";-->
+<!--        }-->
+<!--    }-->
+
+<!--    document.getElementById('signup-form').addEventListener('submit', function(event) {-->
+<!--        event.preventDefault();-->
+
+<!--        const username = document.getElementById('username').value;-->
+<!--        const password = document.getElementById('password').value;-->
+<!--        const repeatPassword = document.getElementById('repeat-password').value;-->
+<!--        const errorMessage = document.getElementById('error-message');-->
+
+<!--        // Validate username and password-->
+<!--        if (!username || !password || !repeatPassword) {-->
+<!--            errorMessage.textContent = 'All fields are required.';-->
+<!--            return;-->
+<!--        }-->
+
+<!--        if (password !== repeatPassword) {-->
+<!--            errorMessage.textContent = 'Passwords do not match.';-->
+<!--            return;-->
+<!--        }-->
+
+<!--        // Prepare data for submission-->
+<!--        const data = {-->
+<!--            username: username,-->
+<!--            passwordhash: password-->
+<!--        };-->
+
+<!--        // Send data to the server-->
+<!--        fetch('http://localhost:3100/api/auth/signup', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            },-->
+<!--            body: JSON.stringify(data)-->
+<!--        })-->
+<!--        .then(response => {-->
+<!--            if (!response.ok) {-->
+<!--                return response.json().then(errorData => {-->
+<!--                    throw new Error(errorData.error || 'Server error');-->
+<!--                });-->
+<!--            }-->
+<!--            // Extract the token from the response headers-->
+<!--            const token = response.headers.get('Authorization');-->
+
+<!--            return response.json().then(data => {-->
+<!--                if (data.error) {-->
+<!--                    errorMessage.textContent = data.error;-->
+<!--                } else {-->
+<!--                    // Store token in local storage or use as needed-->
+<!--                    if (token) {-->
+<!--                        localStorage.setItem('authToken', token.replace('Bearer ', ''));-->
+<!--                    }-->
+<!--                    // Handle successful signup (e.g., redirect or show success message)-->
+<!--                    window.location.href = '/api/status'; // Redirect to login page-->
+<!--                }-->
+<!--            });-->
+<!--        })-->
+<!--        .catch(error => {-->
+<!--            errorMessage.textContent = error.message;-->
+<!--            console.error('Error:', error);-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <!-- Material-UI CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@mui/material@latest/dist/material-ui.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Additional custom styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .toggle-password {
+            position: absolute;
+            top: 38px;
+            right: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+        .mui-button {
+            background-color: #ff416c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .mui-button:hover {
+            background-color: #fff;
+            color: #ff416c;
+            border: 1px solid #ff416c;
+        }
+        .error {
+            color: red;
+            font-size: 0.875rem;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Register</h2>
+    <form id="signup-form">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="mui-textfield" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="mui-textfield" placeholder="Enter password" required>
+            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">Show</button>
+        </div>
+        <div class="form-group">
+            <label for="repeat-password">Repeat Password</label>
+            <input type="password" id="repeat-password" class="mui-textfield" placeholder="Repeat password" required>
+        </div>
+        <button type="submit" class="mui-button mui-button-contained mui-button-primary">NEXT</button>
+        <p id="error-message" class="error"></p>
+    </form>
+</div>
+
+<!-- Material-UI JS -->
+<script src="https://unpkg.com/@mui/material@latest/dist/material-ui.min.js"></script>
+<script>
+    function togglePasswordVisibility(fieldId) {
+        const field = document.getElementById(fieldId);
+        const toggleButton = field.nextElementSibling;
+        if (field.type === "password") {
+            field.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            field.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    }
+
+    $(document).ready(function() {
+        $('#signup-form').on('submit', function(event) {
+            event.preventDefault();
+
+            const username = $('#username').val();
+            const password = $('#password').val();
+            const repeatPassword = $('#repeat-password').val();
+            const errorMessage = $('#error-message');
+
+            // Validate username and password
+            if (!username || !password || !repeatPassword) {
+                errorMessage.text('All fields are required.');
+                return;
+            }
+
+            if (password !== repeatPassword) {
+                errorMessage.text('Passwords do not match.');
+                return;
+            }
+
+            // Prepare data for submission
+            const data = {
+                username: username,
+                passwordhash: password
+            };
+
+            // Send data to the server
+            $.ajax({
+                url: 'http://localhost:3100/api/auth/signup',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(response, status, xhr) {
+                    const token = xhr.getResponseHeader('Authorization');
+                    if (token) {
+                        localStorage.setItem('authToken', token.replace('Bearer ', ''));
+                    }
+                    // Handle successful signup (e.g., redirect or show success message)
+                    window.location.href = '/api/status'; // Redirect to login page
+                },
+                error: function(xhr, status, error) {
+                    let errorMsg = 'Server error';
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMsg = xhr.responseJSON.error;
+                    }
+                    errorMessage.text(errorMsg);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
