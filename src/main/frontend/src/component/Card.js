@@ -46,9 +46,9 @@ const Card = ({ id, deedNo, volNo, pageNo, deedWriterName, buyerName, sellerName
 
   const handleClick = () => {
     setClicked(true);
-    setTimeout(() => {
+//    setTimeout(() => {
       navigate(`/deed/${id}`);
-    }, 200); // Adjust the delay as necessary
+//    }, 200); // Adjust the delay as necessary
   };
 
   return (

@@ -109,6 +109,7 @@ class SecurityConfig(
                 r.requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
                 r.requestMatchers(HttpMethod.HEAD, "/api/**").permitAll()
                 r.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                r.requestMatchers(HttpMethod.POST,"/api/user/addUser").permitAll()
                 r.anyRequest().hasAuthority("USER")
             }
             .addFilterBefore(JwtAuthenticationFilter(tokenProvider, userService), UsernamePasswordAuthenticationFilter::class.java)

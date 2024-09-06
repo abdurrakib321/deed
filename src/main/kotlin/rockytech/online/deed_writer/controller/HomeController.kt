@@ -11,7 +11,7 @@ import rockytech.online.deed_writer.users.service.UserService
 
 @Controller
 class HomeController(private  val userService: UserService):AuthHelperDetails {
-    @RequestMapping(value = ["{_:^(?!index\\.html|deed).*\$}"])
+    @RequestMapping(value = ["{_:^(?!index\\.html|api).*\$}","/deed/**"])
     fun redirect(): String = "forward:/"
     @GetMapping("/status")
     fun getStatus():String{

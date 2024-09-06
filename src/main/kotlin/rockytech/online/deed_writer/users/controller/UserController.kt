@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.ModelAndView
 import rockytech.online.deed_writer.common.AuthHelperDetails
 import rockytech.online.deed_writer.users.model.User
+import rockytech.online.deed_writer.users.repository.UserRepository
 import rockytech.online.deed_writer.users.service.UserService
 
 @RestController
 @RequestMapping("/api/user")
-class UserController(private val userService: UserService) : AuthHelperDetails {
+class UserController(private val userService: UserService,private  val userRepository: UserRepository) : AuthHelperDetails {
     @PatchMapping()
     fun addAdminDetails(@RequestBody user: User):User{
        val phoneNo=getUserId()
@@ -34,6 +35,12 @@ class UserController(private val userService: UserService) : AuthHelperDetails {
     @GetMapping()
     fun getAllUsers():List<User>{
         return userService.getAllUsers();
+    }
+
+    @PostMapping("/addUser")
+
+    fun addUser(@RequestBody user: User):User{
+       return  userRepository.save(user)
     }
 
 }
