@@ -104,7 +104,9 @@ class SecurityConfig(
                     "/swagger-ui/**",
                     "/v3/api-docs",
                     "/v3/api-docs/**",
-                    "/actuator/**"
+                    "/actuator/**",
+                    "/manifest.json",
+                    "/static/**"
                 ).permitAll()
                 r.requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
                 r.requestMatchers(HttpMethod.HEAD, "/api/**").permitAll()
@@ -131,7 +133,7 @@ class SecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://localhost:3100", "http://localhost:3000")
+        configuration.allowedOrigins = listOf("*")
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("Authorization", "Content-Type")
         configuration.allowCredentials = true

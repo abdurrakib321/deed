@@ -1,38 +1,3 @@
-// import React from 'react';
-// import './Card.css'; // Adjust the path as necessary
-
-// const Card = ({ deedNo, volNo, pageNo, deedWriterName, buyerName, sellerName }) => {
-//   return (
-//     <div className="card">
-//       <h3 className="card-heading">Deed No: {deedNo}</h3>
-//       <p className="card-text"><strong>Volume No:</strong> {volNo}</p>
-//       <p className="card-text"><strong>Page No:</strong> {pageNo}</p>
-//       <p className="card-text"><strong>Writer Name:</strong> {deedWriterName}</p>
-//       <p className="card-text"><strong>Buyer Name:</strong> {buyerName}</p>
-//       <p className="card-text"><strong>Seller Name:</strong> {sellerName}</p>
-//     </div>
-//   );
-// };
-
-// export default Card;
-// import React from 'react';
-// import './Card.css'; // Adjust the path as necessary
-// import { Link } from 'react-router-dom';
-
-// const Card = ({ id, deedNo, volNo, pageNo, deedWriterName, buyerName, sellerName }) => {
-//   return (
-//     <Link to={`/deed/${id}`} className="card-link">
-//       <div className="card">
-//         <h3 className="card-heading">Deed No: {deedNo}</h3>
-//         <p className="card-text"><strong>Volume No:</strong> {volNo}</p>
-//         <p className="card-text"><strong>Page No:</strong> {pageNo}</p>
-//         <p className="card-text"><strong>Writer Name:</strong> {deedWriterName}</p>
-//         <p className="card-text"><strong>Buyer Name:</strong> {buyerName}</p>
-//         <p className="card-text"><strong>Seller Name:</strong> {sellerName}</p>
-//       </div>
-//     </Link>
-//   );
-// };
 
 // export default Card;
 import React, { useState } from 'react';

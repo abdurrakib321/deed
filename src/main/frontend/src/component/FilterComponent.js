@@ -55,7 +55,7 @@ const FilterComponent = ({ onSearch }) => {
               variant="outlined"
               label="Vol No"
               fullWidth
-              name="volNumber"
+              name="volNo"
               value={filters.volNo}
               onChange={handleInputChange}
               InputProps={{ style: { backgroundColor: '#f5f5f5', color: 'black' } }}
