@@ -9,8 +9,8 @@ import java.util.*
 
 class DeedDto (
     var deedNo: String,
-    var volNo: String,
-    var pageNo: String,
+    var volNo: String?="NA",
+    var pageNo: String?="NA",
     var deedWriterName: String?,
     @CreatedDate
     var createdAt: LocalDate? = null,

@@ -8,13 +8,13 @@ import java.time.LocalDate
 
 data class BuyerDto (
     var name: String,
-    var fatherName: String,
-    var motherName: String,
-    var villageName: String,
-    var postOffice: String,
-    var policeStation: String,
-    var district: String,
-    var pin: String,
-    var state: String,
-    var modifierName: String?
+    var fatherName: String?="NA",
+    var motherName: String?="NA",
+    var villageName: String?="NA",
+    var postOffice: String?="NA",
+    var policeStation: String?="NA",
+    var district: String?="NA",
+    var pin: String?="NA",
+    var state: String?="NA",
+    var modifierName: String?="NA"
 )

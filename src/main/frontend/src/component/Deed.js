@@ -44,15 +44,15 @@ const Deed = () => {
     const newErrors = {};
 
     Object.keys(deedDto).forEach(key => {
-      if (!deedDto[key]) newErrors[`deedDto.${key}`] = 'This field is required';
+      if (!deedDto[key] && key == 'deedNo') newErrors[`deedDto.${key}`] = 'This field is required';
     });
 
     Object.keys(buyerDto).forEach(key => {
-      if (!buyerDto[key]) newErrors[`buyerDto.${key}`] = 'This field is required';
+      if (!buyerDto[key] && key =='name') newErrors[`buyerDto.${key}`] = 'This field is required';
     });
 
     Object.keys(sellerDto).forEach(key => {
-      if (!sellerDto[key]) newErrors[`sellerDto.${key}`] = 'This field is required';
+      if (!sellerDto[key] && key =='name') newErrors[`sellerDto.${key}`] = 'This field is required';
     });
 
     setErrors(newErrors);

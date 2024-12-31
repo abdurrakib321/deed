@@ -70,7 +70,7 @@ const DeedDetails = () => {
     const newErrors = {};
 
     Object.keys(form).forEach(key => {
-      if (!form[key]) newErrors[key] = 'This field is required';
+      if (!form[key] && key=='name' ||!form[key] && key=='deedNo' ) newErrors[key] = 'This field is required';
     });
 
     setErrors(newErrors);

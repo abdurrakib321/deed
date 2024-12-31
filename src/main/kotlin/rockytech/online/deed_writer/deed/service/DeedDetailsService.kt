@@ -55,8 +55,8 @@ class DeedDetailsService(private val deedDetailsRepository: DeedDetailsRepositor
                 DeedResponse(
                     deedId=deed.id!!,
                     deedNo = deed.deedDto.deedNo,
-                    volNo = deed.deedDto.volNo,
-                    pageNo = deed.deedDto.pageNo,
+                    volNo = deed.deedDto.volNo!!,
+                    pageNo = deed.deedDto.pageNo!!,
                     deedWriterName = deed.deedDto.deedWriterName!!,
                     buyerName = deed.buyerDto.name,
                     sellerName = deed.sellerDto.name,
