@@ -15,7 +15,11 @@ class DeedDetailsController(private val deedDetailsService: DeedDetailsService) 
         deedDetailsModel.deedDto.deedWriterName=deedWriterName!!
         deedDetailsModel.buyerDto.modifierName=deedWriterName
         deedDetailsModel.sellerDto.modifierName=deedWriterName
-        return deedDetailsService.addDeedDetails(deedDetailsModel)
+        deedDetailsModel.deedDto.createdAt=deedDetailsModel.deedDto.createdAt
+        println("deed data $deedDetailsModel.toString()")
+        println("deed date is ${deedDetailsModel.deedDto.createdAt}")
+        val response= deedDetailsService.addDeedDetails(deedDetailsModel)
+        return response
     }
 
     @GetMapping("/filter")
@@ -41,7 +45,7 @@ class DeedDetailsController(private val deedDetailsService: DeedDetailsService) 
             buyerName,
             sellerName,
             createdAtStart,
-            createdAtEnd,
+            updatedAtStart,
             page,
             size
         )

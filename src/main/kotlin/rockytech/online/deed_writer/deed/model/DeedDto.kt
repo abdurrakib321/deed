@@ -12,7 +12,6 @@ class DeedDto (
     var volNo: String?="NA",
     var pageNo: String?="NA",
     var deedWriterName: String?,
-    @CreatedDate
     var createdAt: LocalDate? = null,
     @LastModifiedDate
     var updatedAt: LocalDate? = null
